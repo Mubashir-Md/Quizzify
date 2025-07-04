@@ -1,0 +1,1 @@
+{"root":["./src/db.ts","./src/index.ts","./src/controllers/quiz-controllers.ts","./src/lib/supabase-client.ts","./src/middlewares/verify-token.ts","./src/routes/quiz-routes.ts"],"version":"5.8.3"}
