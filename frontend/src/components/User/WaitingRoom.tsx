@@ -1,32 +1,36 @@
+import { useSocket } from "@/contexts/SocketProvider";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const WaitingRoom = () => {
-  const roomId = localStorage.getItem("roomId");
-  const [webSocket, setWebSocket] = useState<WebSocket>();
-  console.log(roomId);
+  const [users, setUsers] = useState<string[]>([]);
+  const { latestMessage } = useSocket();
+  const nav = useNavigate();
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
-    setWebSocket(ws);
+    if (!latestMessage) return;
 
-    ws.onopen = () => {
-      ws.send(
-        JSON.stringify({
-          type: "join",
-          payload: {
-            roomId: roomId,
-          },
-        })
-      );
-    };
-  }, []);
+    const parsed = JSON.parse(latestMessage.data);
+
+    if(parsed.type === "participants"){
+      setUsers([...parsed.payload.users])
+      console.log(users);
+      
+    }
+
+    if (parsed.type === "question") {
+      nav("/questions"); // Or however you're showing the first question
+    }
+  }, [latestMessage]);
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white h-screen flex flex-col space-y-4 justify-center items-center">
       <h1>Let everyone join</h1>
-      <h1>roomid</h1>
-      {/* mapp all users profile pics or just show nick names */}
-      <button>Start Quiz</button>
+      {users.map((u, idx)=>(
+        <div key={idx} className=" text-black w-full flex flex-row items-center justify-center">
+          <p className="p-4 rounded-xl bg-white m-2">{u}</p>
+        </div>
+      ))}
     </div>
   );
 };

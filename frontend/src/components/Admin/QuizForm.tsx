@@ -33,7 +33,7 @@ const QuizForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const nav = useNavigate();
 
-  if (!user) return <div className="flex justify-center items-center bg-black text-white text-2xl">Loading ...</div>;
+  if (!user) return <div className="flex justify-center items-center bg-black h-screen text-white text-2xl">Loading ...</div>;
 
   const submitForm = async () => {
     console.log(inputValues);
@@ -62,7 +62,7 @@ const QuizForm = () => {
 
   return (
     <div className="bg-black text-white flex flex-col space-y-6 items-center justify-center h-screen">
-      <h1 className="text-2xl">Welcome, {user.email} 👋 </h1>
+      <h1 className="text-2xl">Welcome, {user?.email} 👋 </h1>
       <Card className="w-[50vh] p-6 ">
         <CardHeader>
           <CardTitle className="text-xl">Create your quiz</CardTitle>

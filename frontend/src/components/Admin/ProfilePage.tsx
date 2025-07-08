@@ -1,10 +1,25 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Grid3X3, List } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import { Button } from "../ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 interface Quiz {
   _id: string;
@@ -20,12 +35,15 @@ interface Quiz {
 const ProfilePage = () => {
   const { user, session } = useAuth();
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
-  const [view, setView] = useState<"grid" | "row">("grid");
+  const [showDialog, setShowDialog] = useState(false);
   const nav = useNavigate();
+  const [quizId, setQuizId] = useState<string>('');
+  const [roomId, setRoomId] = useState<string>('');
 
   useEffect(() => {
     if (!session) {
-      nav("/admin/auth");
+      nav("/auth");
+      return;
     }
   }, [session, nav]);
 
@@ -47,58 +65,64 @@ const ProfilePage = () => {
   }, [session]);
 
   if (!user)
-    return <div className="text-white text-center mt-20">Loading...</div>;
+    return (
+      <div className="text-white h-screen flex items-center bg-black justify-center text-center mt-20">
+        Loading...
+      </div>
+    );
 
   return (
-    <div className="bg-black min-h-screen px-6 py-10 text-white">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-1">Welcome, {user.email}</h1>
-        <p className="text-sm mb-6 text-gray-400">Here are your quizzes:</p>
+    <>
+      <div className="bg-black min-h-screen px-6 py-10 text-white ">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-3xl font-bold mb-6">Your Quizzes</h1>
 
-        <div className="flex items-center justify-between mb-4">
-          <ToggleGroup
-            type="single"
-            value={view}
-            onValueChange={(v: any) => v && setView(v as "grid" | "row")}
-          >
-            <ToggleGroupItem value="grid" aria-label="Grid View">
-              <Grid3X3 className="w-4 h-4" />
-            </ToggleGroupItem>
-            <ToggleGroupItem value="row" aria-label="Row View">
-              <List className="w-4 h-4" />
-            </ToggleGroupItem>
-          </ToggleGroup>
-        </div>
-
-        <div
-          className={`gap-4 ${
-            view === "grid"
-              ? "grid grid-cols-1 sm:grid-cols-2"
-              : "flex flex-col"
-          }`}
-        >
-          {quizzes.map((quiz) => (
-            <Card
-              key={quiz._id}
-              className="bg-white text-black hover:scale-[1.01] transition-all cursor-pointer"
-              onClick={() => nav(`/quiz/${quiz._id}`)}
-            >
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold">
-                  {quiz.topic}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600">
-                  Questions: {quiz.questions.length}
-                </p>
-                <p className="text-sm text-gray-600">Room ID: {quiz.roomId}</p>
-              </CardContent>
-            </Card>
-          ))}
+          <Table className="bg-white text-black rounded-lg overflow-hidden">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Topic</TableHead>
+                <TableHead>Questions</TableHead>
+                <TableHead>Room Id</TableHead>
+                <TableHead className="text-center">Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {quizzes.map((quiz) => (
+                <TableRow key={quiz._id}>
+                  <TableCell>{quiz.topic}</TableCell>
+                  <TableCell>{quiz.questions.length}</TableCell>
+                  <TableCell>{quiz.roomId}</TableCell>
+                  <TableCell className="text-center">
+                    <Button
+                      onClick={() => {setShowDialog(true); setQuizId(quiz._id); setRoomId(quiz.roomId)}}
+                      className="cursor-pointer"
+                    >
+                      Launch
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
-    </div>
+
+      {showDialog && (
+        <Dialog open={showDialog} onOpenChange={setShowDialog} >
+          <DialogTrigger>Open</DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Are you sure?</DialogTitle>
+              <DialogDescription>You are going to launch quiz and people can start joining in.</DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+                <Button variant={'outline'} onClick={()=>setShowDialog(false)} className="cursor-pointer">No</Button>
+                <Button variant={'default'} className="cursor-pointer" onClick={()=>nav(`/admin/launch/${quizId}/${roomId}`)}>Yes</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
   );
 };
 

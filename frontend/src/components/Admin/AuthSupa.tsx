@@ -1,50 +1,29 @@
-import { createClient, type Session } from '@supabase/supabase-js'
-import { useEffect, useState } from 'react'
-
-export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-)
+import { supabase, useAuth } from "@/contexts/AuthContext";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function AuthSupa() {
-  const [session, setSession] = useState<Session | null>(null)
+  const { session, user } = useAuth();
+  const nav = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-
-    console.log(session);
-
-    return () => subscription.unsubscribe()
-  }, [])
+    supabase.auth.getSession().then(console.log);
+    if (session && user) {
+      nav("/admin/profile");
+    }
+  }, [session, user]);
 
   const loginWithGoogle = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: 'http://localhost:5173/admin/createQuiz' // or your hosted URL
-      }
-    })
-  }
+      options: { redirectTo: window.location.origin + '/admin/profile' }
+    });
+  };
 
-  if (!session) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-black text-white">
-        <button
-          onClick={loginWithGoogle}
-          className="bg-blue-500 text-white px-6 py-3 rounded cursor-pointer"
-        >
-          Login with Google
-        </button>
-      </div>
-    )
-  }
-
+  return (
+    <div className="flex justify-center items-center h-screen bg-black text-white">
+      <Button onClick={loginWithGoogle}>Login with Google</Button>
+    </div>
+  );
 }

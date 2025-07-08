@@ -2,22 +2,45 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { X } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+} from "./ui/dialog";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { Input } from "./ui/input";
+import { useSocket } from "@/contexts/SocketProvider";
 
 const HomePage = () => {
   const nav = useNavigate();
   const [join, setJoin] = useState(false);
+  const [nickname, setNickname] = useState<string>("");
+  const [roomId, setRoomId] = useState<string>("");
 
+  
+  const { socket } = useSocket();
+  
   const joinRoom = () => {
-    setJoin(false);
+    localStorage.setItem("roomId", roomId)
+    localStorage.setItem("nickname", nickname)
+    if (!socket) return;
+    socket.send(
+      JSON.stringify({
+        type: "join",
+        payload: {
+          nickname,
+          roomId,
+        },
+      })
+    );
     nav("/waiting");
   };
 
-  const handleLogin = ()=>{
-    nav("/admin/auth")
-  }
-  
-
-  
+  const handleLogin = () => {
+    nav("/auth");
+  };
 
   return (
     <div className="flex justify-center space-y-4 items-center flex-col bg-black text-white h-screen">
@@ -27,13 +50,13 @@ const HomePage = () => {
       </p>
       <div className="flex items-center justify-around w-1/3 my-4">
         <Button
-          className="text-2xl py-7 px-6 cursor-pointer"
+          className="text-2xl py-7 px-6 cursor-pointer border border-yellow-200 mr-4"
           onClick={() => setJoin(true)}
         >
           Join a room
         </Button>
         <Button
-          className="text-2xl py-7 px-6 cursor-pointer"
+          className="text-2xl py-7 px-6 cursor-pointer border border-white"
           onClick={handleLogin}
         >
           Create a quiz?
@@ -41,26 +64,45 @@ const HomePage = () => {
       </div>
 
       {join && (
-        <div className="border boder-white p-3 m-2 rounded-xl flex flex-col w-1/4 justify-around">
-          <header className="flex justify-between items-center m-2">
-            <h1 className="text-xl">Enter a room</h1>
-            <span className="cursor-pointer" onClick={() => setJoin(false)}>
-              <X />
-            </span>
-          </header>
-          <input
-            required
-            type="text"
-            placeholder="Enter room id"
-            className="border border-gray-400 rounded-md p-2 m-2"
-          />
-          <Button
-            className="m-2 border border-white cursor-pointer"
-            onClick={joinRoom}
-          >
-            Join room
-          </Button>
-        </div>
+        <Dialog open={join} onOpenChange={setJoin}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Join a room</DialogTitle>
+              <DialogDescription>Enter a room to play quiz</DialogDescription>
+            </DialogHeader>
+
+            <Input
+              required
+              type="text"
+              placeholder="Your nickname"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+            <Input
+              required
+              type="text"
+              placeholder="Enter room id"
+              value={roomId}
+              onChange={(e) => setRoomId(e.target.value)}
+            />
+            <DialogFooter>
+              <Button
+                className="border border-black cursor-pointer"
+                onClick={() => setJoin(false)}
+                variant={"outline"}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="border border-white cursor-pointer"
+                onClick={joinRoom}
+                variant={"default"}
+              >
+                Join room
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );

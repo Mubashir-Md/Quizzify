@@ -17,12 +17,9 @@ const ShowQuiz = () => {
           Authorization: `Bearer ${session?.access_token}`
         }
       })
-      const { roomId, quizId } = res.data;
+      const { quizId } = res.data;
 
-      localStorage.setItem("roomId", roomId);
-      localStorage.setItem("quizId", quizId);
-
-      nav(`/admin/profile?user=${user?.email}`);
+      nav(`/admin/profile`);
 
     } catch (error) {
         console.error("Error saving quiz:", error);
@@ -31,7 +28,7 @@ const ShowQuiz = () => {
 
   return (
     <div className="h-screen flex flex-col items-center justify-evenly bg-black">
-      <Card className="bg-white h-2/3 overflow-auto p-3">
+      <Card className="bg-white h-[80vh] overflow-auto p-3 w-1/2">
         {quizData.questions.map((item: any, index: number) => {
           return (
             <>
@@ -51,7 +48,7 @@ const ShowQuiz = () => {
           );
         })}
       </Card>
-      <Button className="bg-white text-black hover:bg-grey" onClick={saveQuiz}>Save Quiz</Button>
+      <Button className="bg-white text-black hover:bg-grey cursor-pointer" onClick={saveQuiz}>Save Quiz</Button>
     </div>
   );
 };
