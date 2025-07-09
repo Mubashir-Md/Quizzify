@@ -14,6 +14,8 @@ import LaunchQuiz from "./components/Admin/LaunchQuiz.tsx";
 import StartingQuiz from "./components/Admin/StartingQuiz.tsx";
 import { SocketProvider } from "./contexts/SocketProvider.tsx";
 import QuestionsPage from "./components/User/QuestionsPage.tsx";
+import ResultsPage from "./components/Admin/ResultsPage.tsx";
+import UserResults from "./components/User/UserResults.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -32,8 +34,11 @@ createRoot(document.getElementById("root")!).render(
               element={<StartingQuiz />}
             />
             <Route path="/admin/showQuiz" element={<ShowQuiz />} />
+            <Route path="/admin/:roomId/results" element={<ResultsPage />} />
+
             <Route path="/waiting" element={<WaitingRoom />} />
             <Route path="/questions" element={<QuestionsPage />} />
+            <Route path="/results" element={<UserResults />} />
             <Route path="/join" element={<WaitingRoom />} />
           </Routes>
         </BrowserRouter>

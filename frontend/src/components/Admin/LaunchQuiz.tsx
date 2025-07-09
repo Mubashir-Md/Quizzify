@@ -21,7 +21,7 @@ const LaunchQuiz = () => {
         type: "question",
         payload: {
           roomId,
-          quizId,
+          currentIndex: -1
         },
       })
     );
@@ -59,14 +59,14 @@ const LaunchQuiz = () => {
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-start pt-10 bg-black text-white h-screen w-full space-y-5">
+    <div className="flex flex-col items-center justify-center pt-10 bg-black text-white h-screen w-full space-y-5">
       <p className="text-2xl">Launching quiz soon</p>
       <p className="text-2xl flex items-center">
         Join room: <span className="text-4xl mx-2 underline"> {roomId}</span>
       </p>
       {users.map((u)=>(
-        <div className=" text-black flex w-full">
-          <p className="p-4 rounded-xl bg-white m-2">{u}</p>
+        <div className=" text-black flex items-center justify-center w-full">
+          <p className="px-3 py-2 rounded-full bg-white m-2 ">{u}</p>
         </div>
       ))}
       <Button

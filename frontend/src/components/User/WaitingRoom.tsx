@@ -28,7 +28,7 @@ const WaitingRoom = () => {
       <h1>Let everyone join</h1>
       {users.map((u, idx)=>(
         <div key={idx} className=" text-black w-full flex flex-row items-center justify-center">
-          <p className="p-4 rounded-xl bg-white m-2">{u}</p>
+          <p className="p-4 rounded-full bg-white m-2">{u}</p>
         </div>
       ))}
     </div>
