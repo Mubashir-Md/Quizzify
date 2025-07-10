@@ -50,7 +50,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserQuizzes = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/myQuizzes", {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/myQuizzes`, {
           headers: {
             Authorization: `Bearer ${session?.access_token}`,
           },

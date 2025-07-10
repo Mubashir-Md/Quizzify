@@ -12,7 +12,7 @@ const ShowQuiz = () => {
   const saveQuiz = async () => {
 
     try {
-      const res = await axios.post("http://localhost:3000/saveQuiz", quizData, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/saveQuiz`, quizData, {
         headers: {
           Authorization: `Bearer ${session?.access_token}`
         }

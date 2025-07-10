@@ -19,7 +19,7 @@ export const SocketProvider = ({ children }: { children: ReactNode }) => {
   const [nickname, setNickname] = useState<string>("");
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket(`${import.meta.env.VITE_WS_URL}`);
 
     setWebsocket(ws);
 
