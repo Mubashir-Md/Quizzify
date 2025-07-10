@@ -1,5 +1,5 @@
 import { useSocket } from "@/contexts/SocketProvider";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const UserResults = () => {

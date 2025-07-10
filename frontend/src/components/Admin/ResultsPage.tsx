@@ -9,7 +9,7 @@ interface Participant {
 }
 
 const ResultsPage = () => {
-  const { socket, latestMessage } = useSocket();
+  const { latestMessage } = useSocket();
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [totalScore, setTotalScore] = useState<number>();
 

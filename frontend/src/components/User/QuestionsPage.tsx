@@ -1,5 +1,5 @@
 import { useSocket } from "@/contexts/SocketProvider";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Button } from "../ui/button";
@@ -11,7 +11,7 @@ const QuestionsPage = () => {
   const [question, setQuestion] = useState<string>("");
   const [choices, setChoices] = useState<string[]>([]);
   const [correctAnswer, setCorrectAnswer] = useState<string>("");
-  const [index, setIndex] = useState<number>();
+  const [_, setIndex] = useState<number>();
   const [showSubmit, setShowSubmit] = useState<boolean>(true);
 
   const [selected, setSelected] = useState("");

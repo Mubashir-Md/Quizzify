@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { Button } from "../ui/button";
 
 const StartingQuiz = () => {
-  const { quizId, roomId } = useParams();
+  const { roomId } = useParams();
   const { socket, latestMessage } = useSocket();
   const [question, setQuestion] = useState<string>("");
   const [choices, setChoices] = useState<string[]>([]);

@@ -6,18 +6,17 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const ShowQuiz = () => {
   const quizData = JSON.parse(localStorage.getItem("quiz") || "");
-  const { session, user } = useAuth();
+  const { session } = useAuth();
   const nav = useNavigate();
   
   const saveQuiz = async () => {
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/saveQuiz`, quizData, {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/saveQuiz`, quizData, {
         headers: {
           Authorization: `Bearer ${session?.access_token}`
         }
       })
-      const { quizId } = res.data;
 
       nav(`/admin/profile`);
 
