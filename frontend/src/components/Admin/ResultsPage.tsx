@@ -21,7 +21,7 @@ const ResultsPage = () => {
       setParticipants(message.payload.participants);
       setTotalScore(message.payload.totalScore)
     }
-  }, []);
+  }, [latestMessage]);
 
   return (
     <div className="bg-black text-white flex flex-col items-center justify-center h-screen">

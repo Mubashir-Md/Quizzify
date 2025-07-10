@@ -5,6 +5,7 @@ import { WebSocket, WebSocketServer } from "ws";
 import quizRoutes from "./routes/quiz-routes";
 import mongoose from "mongoose";
 import { QuizModel } from "./db";
+import http from 'http';
 
 const app = express();
 app.use(cors());
@@ -15,7 +16,9 @@ app.get('/', (req: Request, res: Response) => {
 })
 app.use("/api", quizRoutes);
 
-const wss = new WebSocketServer({ port: 8080 });
+const server = http.createServer(app)
+
+const wss = new WebSocketServer({ server });
 
 interface AnswerReceived {
   nickname: string;
@@ -298,8 +301,8 @@ const startServer = async () => {
     await mongoose.connect(process.env.MONGO_DB_URI!);
     console.log("✅ MongoDB connected");
 
-    app.listen(port, () => {
-      console.log(`Quizzy form listening on port ${port}`);
+    server.listen(port, () => {
+      console.log(`Quizzify is listening on port ${port}`);
     });
   } catch (error) {}
 };
