@@ -1,5 +1,5 @@
 import { useSocket } from "@/contexts/SocketProvider";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Participant {
   nickname: string;
@@ -25,7 +25,7 @@ const ResultsPage = () => {
 
   return (
     <div className="bg-black text-white flex flex-col items-center justify-center h-screen">
-        {participants.map((p, idx)=>(
+        {participants?.map((p, idx)=>(
             <div key={idx}>
                 <p className="text-2xl">{p.nickname}: {p.score} out of {totalScore}</p>
             </div>

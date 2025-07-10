@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -16,21 +15,21 @@ import { useSocket } from "@/contexts/SocketProvider";
 const HomePage = () => {
   const nav = useNavigate();
   const [join, setJoin] = useState(false);
-  const [nickname, setNickname] = useState<string>("");
+  const [userName, setUsername] = useState<string>("");
   const [roomId, setRoomId] = useState<string>("");
 
   
-  const { socket } = useSocket();
+  const { socket, setNickname } = useSocket();
   
   const joinRoom = () => {
     localStorage.setItem("roomId", roomId)
-    localStorage.setItem("nickname", nickname)
+    setNickname(userName)
     if (!socket) return;
     socket.send(
       JSON.stringify({
         type: "join",
         payload: {
-          nickname,
+          nickname: userName,
           roomId,
         },
       })
@@ -75,8 +74,8 @@ const HomePage = () => {
               required
               type="text"
               placeholder="Your nickname"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              value={userName}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <Input
               required

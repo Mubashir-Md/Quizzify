@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 
 const UserResults = () => {
-  const { socket, latestMessage } = useSocket();
+  const { latestMessage } = useSocket();
   const [score, setScore] = useState<number>();
   const [totalScore, setTotalScore] = useState<number>();
 

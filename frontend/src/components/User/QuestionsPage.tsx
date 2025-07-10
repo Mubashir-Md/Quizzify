@@ -7,19 +7,17 @@ import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 
 const QuestionsPage = () => {
-  const { socket, latestMessage } = useSocket();
+  const { socket, latestMessage, nickname } = useSocket();
   const [question, setQuestion] = useState<string>("");
   const [choices, setChoices] = useState<string[]>([]);
   const [correctAnswer, setCorrectAnswer] = useState<string>("");
   const [index, setIndex] = useState<number>();
-  const [isRight, setIsRight] = useState<string>("");
   const [showSubmit, setShowSubmit] = useState<boolean>(true);
 
   const [selected, setSelected] = useState("");
 
   const [done, setDone] = useState<boolean>(false);
 
-  const nickname = localStorage.getItem("nickname") || "";
   const roomId = localStorage.getItem("roomId") || "";
 
   const nav = useNavigate()
