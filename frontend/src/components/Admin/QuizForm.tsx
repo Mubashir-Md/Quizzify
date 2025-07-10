@@ -39,7 +39,7 @@ const QuizForm = () => {
     console.log(inputValues);
     setLoading(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/quiz`, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/quiz`, {
         ...inputValues,
         ownerId: user.id,
       }, {

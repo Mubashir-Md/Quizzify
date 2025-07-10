@@ -12,7 +12,7 @@ const ShowQuiz = () => {
   const saveQuiz = async () => {
 
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/saveQuiz`, quizData, {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/saveQuiz`, quizData, {
         headers: {
           Authorization: `Bearer ${session?.access_token}`
         }
