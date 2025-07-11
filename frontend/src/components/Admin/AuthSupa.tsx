@@ -23,7 +23,7 @@ export default function AuthSupa() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-black text-white">
-      <Button onClick={loginWithGoogle}>Login with Google</Button>
+      <Button onClick={loginWithGoogle} className="border border-white cursor-pointer">Login with Google</Button>
     </div>
   );
 }
