@@ -9,7 +9,7 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-const Button = ({ 
+const ButtonQuiz = ({ 
   children, 
   onClick, 
   className = '', 
@@ -36,4 +36,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default ButtonQuiz;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "../ui/Button";
+import ButtonQuiz from "../ui/Button";
 import { useSocket } from "@/contexts/SocketProvider";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -71,13 +71,13 @@ const LaunchQuiz = () => {
           <p className="px-3 py-2 rounded-full bg-white m-2 ">{u}</p>
         </div>
       ))}
-      <Button
+      <ButtonQuiz
         className="border-white border cursor-pointer"
         onClick={startQuiz}
         variant="primary"
       >
         Start Quiz
-      </Button>
+      </ButtonQuiz>
     </div>
   );
 };

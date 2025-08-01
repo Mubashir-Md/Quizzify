@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "../ui/Button";
+import ButtonQuiz from "../ui/Button";
 import Input  from "../ui/Input";
 import Select from "../ui/Select";
 import axios from "axios";
@@ -193,14 +193,14 @@ const QuizForm = () => {
 
                 {/* Submit Button */}
                 <div className="pt-4">
-                  <Button
+                  <ButtonQuiz
                     onClick={submitForm}
                     className="w-full"
                     disabled={!canSubmit}
                   >
                     <Brain className="w-4 h-4" />
                     Generate Quiz
-                  </Button>
+                  </ButtonQuiz>
                 </div>
               </form>
             </div>

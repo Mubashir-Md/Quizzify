@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSocket } from "@/contexts/SocketProvider";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Plus, Users, X } from "lucide-react";
-import Button from "./ui/Button";
+import ButtonQuiz from "./ui/Button";
 
 const HomePage = () => {
   const nav = useNavigate();
@@ -77,66 +77,25 @@ const HomePage = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <Button
+            <ButtonQuiz
               onClick={() => setJoin(true)}
               variant="primary"
               >
               <Users className="w-6 h-6" />
               Join a Room
-            </Button>
+            </ButtonQuiz>
 
-            <Button
+            <ButtonQuiz
               onClick={handleLogin}
               variant="secondary"
             >
               <Plus className="w-6 h-6" />
               Create Quiz
-            </Button>
+            </ButtonQuiz>
           </div>
         </div>
       </div>
 
-      {/* {join && (
-        <Dialog open={join} onOpenChange={setJoin}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Join a room</DialogTitle>
-              <DialogDescription>Enter a room to play quiz</DialogDescription>
-            </DialogHeader>
-
-            <Input
-              required
-              type="text"
-              placeholder="Your nickname"
-              value={userName}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <Input
-              required
-              type="text"
-              placeholder="Enter room id"
-              value={roomId}
-              onChange={(e) => setRoomId(e.target.value)}
-            />
-            <DialogFooter>
-              <Button
-                className="border border-black cursor-pointer"
-                onClick={() => setJoin(false)}
-                variant={"outline"}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="border border-white cursor-pointer"
-                onClick={joinRoom}
-                variant={"default"}
-              >
-                Join room
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      )} */}
 
       {/* Join Room Modal */}
       {join && (
@@ -184,21 +143,21 @@ const HomePage = () => {
 
 
             <div className="flex gap-4 mt-8">
-              <Button
+              <ButtonQuiz
                 onClick={() => setJoin(false)}
                 variant="secondary"
                 className="flex-1 text-base py-3 cursor-pointer"
               >
                 Cancel
-              </Button>
-              <Button
+              </ButtonQuiz>
+              <ButtonQuiz
                 onClick={joinRoom}
                 variant="primary"
                 className="flex-1 text-base py-3 cursor-pointer"
                 disabled={!userName.trim() || !roomId.trim()}
               >
                 Join Room
-              </Button>
+              </ButtonQuiz>
             </div>
           </div>
         </div>

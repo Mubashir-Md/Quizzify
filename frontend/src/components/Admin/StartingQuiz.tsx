@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import clsx from "clsx";
-import Button from "../ui/Button";
+import ButtonQuiz from "../ui/Button";
 
 const StartingQuiz = () => {
   const { roomId } = useParams();
@@ -133,31 +133,31 @@ const StartingQuiz = () => {
           )}
 
           {revealAnswer && (
-            <Button
+            <ButtonQuiz
               className="mt-4 text-2xl border-white border cursor-pointer p-10"
               onClick={showAnswer}
             >
               Reveal Answer
-            </Button>
+            </ButtonQuiz>
           )}
           {nextQuestion && (
-            <Button
+            <ButtonQuiz
               className="mt-4 text-2xl border-white border cursor-pointer p-10"
               onClick={showNext}
             >
               Next Question
-            </Button>
+            </ButtonQuiz>
           )}
         </>
       ) : (
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-3xl">All questions are completed</h1>
-          <Button
+          <ButtonQuiz
             className="mt-4 text-2xl border-white border cursor-pointer p-10"
             onClick={showResults}
           >
             Show Results
-          </Button>
+          </ButtonQuiz>
         </div>
       )}
     </div>

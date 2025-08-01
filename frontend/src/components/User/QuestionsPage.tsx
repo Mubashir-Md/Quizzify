@@ -2,7 +2,7 @@ import { useSocket } from "@/contexts/SocketProvider";
 import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import Button from "../ui/Button";
+import ButtonQuiz from "../ui/Button";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 
@@ -104,14 +104,14 @@ const QuestionsPage = () => {
           </RadioGroup>
 
           {showSubmit && (
-            <Button
+            <ButtonQuiz
               className="mt-4 text-2xl border-white border cursor-pointer p-10 hover:bg-green-900"
               onClick={handleSubmit}
               disabled={!selected}
               type="button"
             >
               Submit Answer
-            </Button>
+            </ButtonQuiz>
           )}
         </>
         : 

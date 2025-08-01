@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { CheckCircle, FileText } from "lucide-react";
 import { useState } from "react";
-import Button from "../ui/Button";
+import ButtonQuiz from "../ui/Button";
 
 const ShowQuiz = () => {
   const quizData = JSON.parse(localStorage.getItem("quiz") || "");
@@ -171,7 +171,7 @@ const ShowQuiz = () => {
 
         {/* Save Button */}
         <div className="flex justify-center">
-          <Button
+          <ButtonQuiz
             onClick={saveQuiz}
             disabled={loading}
             className="px-8 py-4 text-lg"
@@ -187,7 +187,7 @@ const ShowQuiz = () => {
                 Save Quiz
               </>
             )}
-          </Button>
+          </ButtonQuiz>
         </div>
       </div>
     </div>
