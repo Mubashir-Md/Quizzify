@@ -11,6 +11,7 @@ const QuizQuestionSchema = new Schema({
 const QuizSchema = new Schema(
   {
     topic: { type: String, required: true },
+    difficulty: { type: String, required: true },
     questions: { type: [QuizQuestionSchema], required: true },
     ownerId: { type: String, required: true }, // Supabase UID or anon ID
     roomId: { type: String, unique: true, required: true },

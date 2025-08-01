@@ -14,6 +14,7 @@ export const createQuiz = async (req: Request, res: Response) => {
       - Format the response strictly as a single JSON object in this structure:
       {{
           topic: ${topic},
+          difficulty: ${difficulty},
           questions: 
               [
                   {{
@@ -52,11 +53,11 @@ export const createQuiz = async (req: Request, res: Response) => {
 
 export const saveQuiz = async (req: Request, res: Response) => {
   const ownerId = (req as any).user.id;
-  const { topic, questions } = req.body;
+  const { topic, difficulty, questions } = req.body;
 
   try {
     const roomId = Math.floor(100000 + Math.random() * 900000).toString();
-    const quiz = new QuizModel({ topic, questions, ownerId, roomId });
+    const quiz = new QuizModel({ topic, difficulty, questions, ownerId, roomId });
     await quiz.save();
     res.json({ roomId, quizId: quiz._id });
   } catch (err) {

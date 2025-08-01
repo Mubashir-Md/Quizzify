@@ -16,33 +16,39 @@ import { SocketProvider } from "./contexts/SocketProvider.tsx";
 import QuestionsPage from "./components/User/QuestionsPage.tsx";
 import ResultsPage from "./components/Admin/ResultsPage.tsx";
 import UserResults from "./components/User/UserResults.tsx";
+import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <SocketProvider>
-        <BrowserRouter>
-          <AdminNavbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/auth" element={<AuthSupa />} />
-            <Route path="/admin/createQuiz" element={<QuizForm />} />
-            <Route path="/admin/profile" element={<ProfilePage />} />
-            <Route path="/admin/launch/:quizId/:roomId" element={<LaunchQuiz />} />
-            <Route
-              path="/admin/startQuiz/:quizId/:roomId"
-              element={<StartingQuiz />}
-            />
-            <Route path="/admin/showQuiz" element={<ShowQuiz />} />
-            <Route path="/admin/:roomId/results" element={<ResultsPage />} />
+    <ThemeProvider>
+      <AuthProvider>
+        <SocketProvider>
+          <BrowserRouter>
+            <AdminNavbar />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/auth" element={<AuthSupa />} />
+              <Route path="/admin/createQuiz" element={<QuizForm />} />
+              <Route path="/admin/profile" element={<ProfilePage />} />
+              <Route
+                path="/admin/launch/:quizId/:roomId"
+                element={<LaunchQuiz />}
+              />
+              <Route
+                path="/admin/startQuiz/:quizId/:roomId"
+                element={<StartingQuiz />}
+              />
+              <Route path="/admin/showQuiz" element={<ShowQuiz />} />
+              <Route path="/admin/:roomId/results" element={<ResultsPage />} />
 
-            <Route path="/waiting" element={<WaitingRoom />} />
-            <Route path="/questions" element={<QuestionsPage />} />
-            <Route path="/results" element={<UserResults />} />
-            <Route path="/join" element={<WaitingRoom />} />
-          </Routes>
-        </BrowserRouter>
-      </SocketProvider>
-    </AuthProvider>
+              <Route path="/waiting" element={<WaitingRoom />} />
+              <Route path="/questions" element={<QuestionsPage />} />
+              <Route path="/results" element={<UserResults />} />
+              <Route path="/join" element={<WaitingRoom />} />
+            </Routes>
+          </BrowserRouter>
+        </SocketProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>
 );

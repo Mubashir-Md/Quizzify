@@ -2,7 +2,7 @@ import { useSocket } from "@/contexts/SocketProvider";
 import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Button } from "../ui/button";
+import Button from "../ui/Button";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 

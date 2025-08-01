@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import clsx from "clsx";
-import { Button } from "../ui/button";
+import Button from "../ui/Button";
 
 const StartingQuiz = () => {
   const { roomId } = useParams();
