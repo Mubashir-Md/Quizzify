@@ -18,6 +18,8 @@ const QuizForm = () => {
     difficulty: "",
   });
 
+  const canSubmit = inputValues.topic.trim() !== "" && inputValues.questions > 0 && inputValues.choices !== "" && inputValues.difficulty !== "";
+
   const { user, session } = useAuth();
   const { isDarkMode } = useTheme();
   const [loading, setLoading] = useState<boolean>(false);
@@ -271,6 +273,7 @@ const QuizForm = () => {
                     type="text"
                     placeholder="Enter the topic..."
                     isDarkMode={isDarkMode}
+                    required={true}
                     onChange={(e) =>
                       setInputValues({ ...inputValues, topic: e.target.value })
                     }
@@ -288,6 +291,7 @@ const QuizForm = () => {
                     type="number"
                     placeholder="Enter the number of questions..."
                     isDarkMode={isDarkMode}
+                    required={true}
                     onChange={(e) =>
                       setInputValues({
                         ...inputValues,
@@ -345,6 +349,7 @@ const QuizForm = () => {
                   <Button
                     onClick={submitForm}
                     className="w-full"
+                    disabled={!canSubmit}
                   >
                     <Brain className="w-4 h-4" />
                     Generate Quiz

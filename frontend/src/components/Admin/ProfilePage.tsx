@@ -94,7 +94,7 @@ const ProfilePage = () => {
 
   if (!user)
     return (
-      <div className="text-white h-screen flex items-center bg-black justify-center text-center mt-20">
+      <div className={`text-white h-screen flex items-center justify-center text-center text-8xl ${isDarkMode ? "bg-black text-yellow-300" : "bg-white text-yellow-500"}`}>
         Loading...
       </div>
     );

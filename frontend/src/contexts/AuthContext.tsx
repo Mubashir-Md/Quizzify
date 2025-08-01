@@ -6,6 +6,7 @@ import {
   type ReactNode,
   useContext,
 } from "react";
+import { useTheme } from "./ThemeContext";
 
 interface AuthContextType {
   user: User | null;
@@ -26,6 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const {isDarkMode} = useTheme()
 
   useEffect(() => {
     const restoreSession = async () => {
@@ -53,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   if (loading)
     return (
-      <div className="text-white h-screen flex items-center bg-black justify-center text-center mt-20">
+      <div className={`text-white h-screen flex items-center justify-center text-center text-8xl text-bold ${isDarkMode ? "bg-black text-yellow-300" : "bg-white text-yellow-500"}`}>
         Loading...
       </div>
     );

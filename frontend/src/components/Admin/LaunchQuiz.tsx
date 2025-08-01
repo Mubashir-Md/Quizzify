@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../ui/Button";
 import { useSocket } from "@/contexts/SocketProvider";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const LaunchQuiz = () => {
 
@@ -9,6 +10,7 @@ const LaunchQuiz = () => {
   const [users, setUsers] = useState<string[]>([])
   const { socket, latestMessage } = useSocket();
   const nav = useNavigate();
+  const {isDarkMode} = useTheme()
 
   const startQuiz = () => {
     if (!socket || !roomId || !quizId) {
@@ -59,10 +61,10 @@ const LaunchQuiz = () => {
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center pt-10 bg-black text-white h-screen w-full space-y-5">
-      <p className="text-2xl">Launching quiz soon</p>
-      <p className="text-2xl flex items-center">
-        Join room: <span className="text-4xl mx-2 underline"> {roomId}</span>
+    <div className={`flex flex-col items-center justify-center ${isDarkMode ? "bg-black text-white" : "bg-white text-black"} min-h-screen w-full space-y-10`}>
+      <p className={`text-5xl ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'} text-shadow-2xs text-shadow-yellow-300`}>Launching quiz soon</p>
+      <p className="text-5xl flex items-center">
+        Room ID: <span className="text-7xl mx-2 underline"> {roomId}</span>
       </p>
       {users.map((u)=>(
         <div className=" text-black flex items-center justify-center w-full">
