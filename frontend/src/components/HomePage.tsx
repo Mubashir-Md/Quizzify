@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSocket } from "@/contexts/SocketProvider";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Plus, Users, X } from "lucide-react";
-import ButtonQuiz from "./ui/Button";
+import Button from "./ui/Button";
 
 const HomePage = () => {
   const nav = useNavigate();
@@ -77,21 +77,21 @@ const HomePage = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <ButtonQuiz
+            <Button
               onClick={() => setJoin(true)}
               variant="primary"
               >
               <Users className="w-6 h-6" />
               Join a Room
-            </ButtonQuiz>
+            </Button>
 
-            <ButtonQuiz
+            <Button
               onClick={handleLogin}
               variant="secondary"
             >
               <Plus className="w-6 h-6" />
               Create Quiz
-            </ButtonQuiz>
+            </Button>
           </div>
         </div>
       </div>
@@ -184,21 +184,21 @@ const HomePage = () => {
 
 
             <div className="flex gap-4 mt-8">
-              <ButtonQuiz
+              <Button
                 onClick={() => setJoin(false)}
                 variant="secondary"
                 className="flex-1 text-base py-3 cursor-pointer"
               >
                 Cancel
-              </ButtonQuiz>
-              <ButtonQuiz
+              </Button>
+              <Button
                 onClick={joinRoom}
                 variant="primary"
                 className="flex-1 text-base py-3 cursor-pointer"
                 disabled={!userName.trim() || !roomId.trim()}
               >
                 Join Room
-              </ButtonQuiz>
+              </Button>
             </div>
           </div>
         </div>

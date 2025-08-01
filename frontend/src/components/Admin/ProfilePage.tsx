@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Check, Copy, FileText, Play } from "lucide-react";
-import ButtonQuiz from "../ui/Button";
+import Button from "../ui/Button";
 
 interface Quiz {
   _id: string;
@@ -186,7 +186,7 @@ const ProfilePage = () => {
 
               {/* Card Footer */}
               <div className="px-6 pb-6 flex justify-between space-x-4">
-                <ButtonQuiz
+                <Button
                   onClick={() => {
                     
                   }}
@@ -195,8 +195,8 @@ const ProfilePage = () => {
                 >
                   <Play className="w-4 h-4" />
                   View Quiz
-                </ButtonQuiz>
-                <ButtonQuiz
+                </Button>
+                <Button
                   onClick={() => {
                     setShowDialog(true);
                     setQuizId(quiz._id);
@@ -206,7 +206,7 @@ const ProfilePage = () => {
                 >
                   <Play className="w-4 h-4" />
                   Launch Quiz
-                </ButtonQuiz>
+                </Button>
               </div>
             </div>
           ))}
@@ -244,19 +244,19 @@ const ProfilePage = () => {
               Room ID: <span className="font-mono font-semibold">{roomId}</span>
             </p>
             <div className="flex gap-3">
-              <ButtonQuiz
+              <Button
                 onClick={() => setShowDialog(false)}
                 variant="secondary"
                 className="flex-1"
               >
                 Cancel
-              </ButtonQuiz>
-              <ButtonQuiz
+              </Button>
+              <Button
                 onClick={() => nav(`/admin/launch/${quizId}/${roomId}`)}
                 className="flex-1"
               >
                 Confirm Launch
-              </ButtonQuiz>
+              </Button>
             </div>
           </div>
         </div>
