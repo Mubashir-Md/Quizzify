@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ButtonQuiz from "../ui/Button";
+import ButtonQuiz from "../ui/ButtonQuiz";
 import Input  from "../ui/Input";
 import Select from "../ui/Select";
 import axios from "axios";

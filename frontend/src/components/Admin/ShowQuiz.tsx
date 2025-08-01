@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { CheckCircle, FileText } from "lucide-react";
 import { useState } from "react";
-import ButtonQuiz from "../ui/Button";
+import ButtonQuiz from "../ui/ButtonQuiz";
 
 const ShowQuiz = () => {
   const quizData = JSON.parse(localStorage.getItem("quiz") || "");

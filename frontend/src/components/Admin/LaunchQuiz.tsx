@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ButtonQuiz from "../ui/Button";
+import ButtonQuiz from "../ui/ButtonQuiz";
 import { useSocket } from "@/contexts/SocketProvider";
 import { useTheme } from "@/contexts/ThemeContext";
 

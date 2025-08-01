@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSocket } from "@/contexts/SocketProvider";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Plus, Users, X } from "lucide-react";
-import ButtonQuiz from "./ui/Button";
+import ButtonQuiz from "./ui/ButtonQuiz";
 
 const HomePage = () => {
   const nav = useNavigate();

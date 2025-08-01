@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Check, Copy, FileText, Play } from "lucide-react";
-import ButtonQuiz from "../ui/Button";
+import ButtonQuiz from "../ui/ButtonQuiz";
 
 interface Quiz {
   _id: string;
