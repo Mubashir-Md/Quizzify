@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ButtonQuiz from "../ui/ButtonQuiz";
-import Input  from "../ui/Input";
-import Select from "../ui/Select";
+import Input  from "../ui/InputQuiz";
+import Select from "../ui/SelectQuiz";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import QuizLoader from "../QuizLoader";
